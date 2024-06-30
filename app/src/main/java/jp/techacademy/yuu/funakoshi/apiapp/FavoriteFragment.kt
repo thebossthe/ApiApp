@@ -15,6 +15,7 @@ class FavoriteFragment: Fragment() {
 
     private val favoriteAdapter by lazy { FavoriteAdapter() }
 
+
     // FavoriteFragment -> MainActivity に削除を通知する
     private var fragmentCallback: FragmentCallback? = null
 
@@ -45,7 +46,7 @@ class FavoriteFragment: Fragment() {
             }
             // Itemをクリックしたとき
             onClickItem = {
-                fragmentCallback?.onClickItem(url,id.toString())
+                fragmentCallback?.onClickItem(FavoriteShop.url,id.toString())
             }
         }
         // RecyclerViewの初期化
