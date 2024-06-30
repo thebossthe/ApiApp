@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         Log.d("TEST","起動END")
     }
 
-    override fun onClickItem(url: String) {
-        var id = ""
+    override fun onClickItem(url: String,id: String) {
         WebViewActivity.start(this, url,id)
     }
 

@@ -19,12 +19,6 @@ class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // IntentからURLとIDを取得
-        val url = intent.getStringExtra(KEY_URL).toString()
-        val id = intent.getStringExtra(KEY_ID).toString()
-
-        Log.d("TEST","id" + id)
-
         binding.webView.apply {
             loadUrl(intent.getStringExtra(KEY_URL).toString())
             webViewClient = WebViewClient()
