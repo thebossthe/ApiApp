@@ -12,6 +12,7 @@ class WebViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebViewBinding
 
     private var isFavorite = false
+    private lateinit var Shop: Shop
     private lateinit var favoriteShop: FavoriteShop
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +27,14 @@ class WebViewActivity : AppCompatActivity() {
 
         binding.WebfavoriteImageView.setOnClickListener {
             if (isFavorite) {
-                deleteFavorite()
+                deleteFavorite(Shop.id)
             } else {
-                addFavorite()
+                addFavorite(Shop)
             }
         }
     }
 
-    private fun updateFavoriteImage() {
+    private fun updateFavoriteImage(isFavorite:Boolean) {
         if (isFavorite) {
             binding.WebfavoriteImageView.setImageResource(R.drawable.ic_star_border)
         } else {
@@ -41,22 +42,20 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    private fun addFavorite() {
+    private fun addFavorite(shop: Shop) {
         FavoriteShop.insert(FavoriteShop().apply {
-            id = favoriteShop.id
-            name = favoriteShop.name
-            imageUrl = favoriteShop.imageUrl
-            url = favoriteShop.url
+            id = shop.id
+            name = shop.name
+            imageUrl = shop.logoImage
+            url = shop.couponUrls.sp.ifEmpty { shop.couponUrls.pc }
         })
-        isFavorite = true
-        updateFavoriteImage()
+        updateFavoriteImage(true)
         Log.d("TEST","Webページでお気に入り追加")
     }
 
-    private fun deleteFavorite() {
-        FavoriteShop.delete(favoriteShop.id)
-        isFavorite = false
-        updateFavoriteImage()
+    private fun deleteFavorite(id: String) {
+        FavoriteShop.delete(id)
+        updateFavoriteImage(false)
         Log.d("TEST","Webページでお気に入り削除")
     }
 
